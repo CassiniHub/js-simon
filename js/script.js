@@ -9,25 +9,27 @@
 // * quanti e quali dei numeri da indovinare sono stati individuati.
 
 var clock;
-var sec             = 3;
-var rndNumbers      = pcRamdomNumbers(5, 10);
-var selectedNumbers = [];
-var rightNumbers    = [];
-
+var sec        = 3;
+var rndNumbers = pcRamdomNumbers(5, 10);
 
 function userNumbers() {
 
-   while (selectedNumbers.length < 5) {
+   var numbers = {
+      selectedNumbers: [],
+      rightNumbers: []
+   }
+
+   while (numbers.selectedNumbers.length < 5) {
          
       var userNumber = parseInt(prompt("Inserisci uno dei numeri precedentemente visualizzati:"));
 
-      if (!selectedNumbers.includes(userNumber) && userNumber > 0) {
+      if (!numbers.selectedNumbers.includes(userNumber) && userNumber > 0) {
 
-         selectedNumbers.push(userNumber);
+         numbers.selectedNumbers.push(userNumber);
 
          if (rndNumbers.includes(userNumber)) {
             
-            rightNumbers.push(userNumber);
+            numbers.rightNumbers.push(userNumber);
          }
       } else {
 
@@ -35,7 +37,7 @@ function userNumbers() {
       }
    }
 
-   return selectedNumbers;
+   return numbers;
 }
 
 function tick() {
@@ -47,10 +49,9 @@ function tick() {
       clearInterval(clock)
       document.getElementById("mainTitle").innerHTML = "Stop al tempo";
 
-      userNumbers();
-      console.log("Hai indovinato " + rightNumbers.length + " numeri.", "I numeri ricordati sono: " + rightNumbers);
+      var numbers = userNumbers();
+      console.log("Hai indovinato " + numbers.rightNumbers.length + " numeri.", "I numeri ricordati sono: " + numbers.rightNumbers);
    }
-
 }
 
 function init() {
