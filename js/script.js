@@ -9,8 +9,9 @@
 // * quanti e quali dei numeri da indovinare sono stati individuati.
 
 var clock;
-var sec        = 3;
-var rndNumbers = pcRamdomNumbers(5, 10);
+var sec         = 3;
+var rndNumbers  = pcRamdomNumbers(5, 10);
+var gameStarted = false;
 
 function userNumbers() {
 
@@ -50,16 +51,27 @@ function tick() {
       document.getElementById("mainTitle").innerHTML = "Stop al tempo";
 
       var numbers = userNumbers();
+      gameStarted = false;
+      console.log(gameStarted);
       console.log("Hai indovinato " + numbers.rightNumbers.length + " numeri.", "I numeri ricordati sono: " + numbers.rightNumbers);
    }
 }
 
 function init() {
+   console.log(gameStarted);
+   gameStarted = true;
+   console.log(gameStarted);
    alert(rndNumbers);
 
    clock = setInterval(tick, 1000);
 }
 
-document.getElementById("btn").addEventListener("click", init);
+if (gameStarted == false) {
+
+   document.getElementById("btn").addEventListener("click", init);
+} else {
+
+   console.log("La partita è già in corso");
+}
 
 
