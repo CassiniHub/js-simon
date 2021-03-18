@@ -58,20 +58,20 @@ function tick() {
 }
 
 function init() {
-   console.log(gameStarted);
-   gameStarted = true;
-   console.log(gameStarted);
-   alert(rndNumbers);
 
-   clock = setInterval(tick, 1000);
+   if (gameStarted == false) {
+      console.log(gameStarted);
+      gameStarted = true;
+      console.log(gameStarted);
+      alert(rndNumbers);
+   
+      clock = setInterval(tick, 1000);
+   } else {
+
+      console.log("La partita è già in corso.");
+   }
 }
 
-if (gameStarted == false) {
-
-   document.getElementById("btn").addEventListener("click", init);
-} else {
-
-   console.log("La partita è già in corso");
-}
+document.getElementById("btn").addEventListener("click", init);
 
 
